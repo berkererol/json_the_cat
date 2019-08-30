@@ -1,30 +1,34 @@
 const request = require('request');
 const args = process.argv.slice(2); //Getting command line inputs
 const breedName = args[0];
-const url = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
-
-request(url, (error, response, body) => {
-
-  if (error) {
-    console.log(`Failed to request details: ${error}`)
-  }
-
-  if (JSON.parse(body).length === 0) {
-    console.log(`\nCat breed is not found.\n`);
-  }
-  else {
-    const data = JSON.parse(body); //Turning json packages to objects.
-    console.log(data);
-    const catDescription = data[0].description;
-
-    catDescription ? console.log(catDescription) : console.log(`Failed to find breed ${breedName}`);
-
-  }
 
 
+const getBreedByDescription = function (breedName, cb) {
+  const url = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
+  return request(url, (error, response, body) => {
+    if (error) {
+      // console.log(`Failed to request details: ${error}`)
+      cb(error, null);
+    }
+
+    if (JSON.parse(body).length === 0) {
+      // console.log(`\nCat breed is not found.\n`);
+      cb(null, 'Cat breed is not found');
+    } else {
+
+      const data = JSON.parse(body); //Turning json packages to objects.
+      // const catDescription = data[0].description;
+      // catDescription ? console.log(catDescription) : console.log(`Failed to find breed ${breedName}`);
+      cb(null, data[0].description);
+    }
+  });
+};
+
+getBreedByDescription(breedName, (err, data) => {
+  console.log(data);
 });
 
-
+module.exports = { getBreedByDescription };
 
 
 

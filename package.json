@@ -1,0 +1,29 @@
+{
+  "name": "d4-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "breedFetcher.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berkererol/json_the_cat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berkererol/json_the_cat/issues"
+  },
+  "homepage": "https://github.com/berkererol/json_the_cat#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
